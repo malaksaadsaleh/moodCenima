@@ -1,0 +1,433 @@
+*,*::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body{
+  min-height: 100%;
+  background-color: #0A0A0F;
+  color: #F0EDE6;
+  font-family: 'DM Sans', sans-serif;
+  height: 3000px;
+}
+
+.container{
+  position: relative;
+  z-index: 2;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 56px 24px 100px;
+}
+
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 64px;
+}
+
+.logo{
+  font-family: 'Playfair Display', serif;
+  font-size: 23px;
+  text-decoration: none;
+  color: #F0EDE6;
+}
+
+.highlight{
+  color: #4A9CAD;
+}
+
+.nav-links{
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.home-link{
+  text-decoration: none;
+  color: #8C8FA3;
+  transition: color 0.2s;
+}
+
+.home-link:hover{
+  color: #4A9CAD;
+}
+
+.wishlist-link{
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  background-color: color-mix(in srgb, #4A9CAD 12%, transparent);
+  border: 1px solid color-mix(in srgb, #4A9CAD 30%, transparent);
+  color: #4A9CAD;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  transition: background-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.wishlist-link:hover{
+  background-color: color-mix(in srgb, #4A9CAD 22%, transparent);
+  box-shadow: 0 0 20px color-mix(in srgb, #4A9CAD 22%, transparent);
+}
+
+header{
+  margin-bottom: 52px;
+}
+
+.step-indicator{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.step-dot{
+  height: 8px;
+  width: 8px;
+  border-radius: 4px;
+  background-color: color-mix(in srgb, #4A9CAD 25%, transparent);
+}
+
+.step-indicator .step-dot.active{
+  background-color: #4A9CAD;
+  box-shadow: 0 0 10px color-mix(in srgb, #4A9CAD 50%, transparent);
+}
+
+.step-dot .done{
+  background-color: color-mix(in srgb, #4A9CAD 55%, transparent);
+}
+
+.steps{
+  color: #8C8FA3;
+  font-size: 12px;
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+}
+
+h1{
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vm, 3rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: #F0EDE6;
+  margin-bottom: 14px;
+}
+
+h1 em{
+  font-style: italic;
+  color: #4A9CAD;
+}
+
+.Subtitle{
+  font-size: 16px;
+  font-weight: 300;
+  color: #8C8FA3;
+  line-height: 1.7;
+  max-width: 480px;
+}
+
+
+.question-block{
+  margin-bottom: 40px;
+}
+
+.question-label{
+  color: #4A9CAD;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.question-text{
+  font-size: 20px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: #F0EDE6;
+  margin-bottom: 18px;
+  line-height: 1.4;
+}
+
+.mood-grid{
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+}
+
+.mood-tile{
+  padding: 25px 20px;
+  border-radius: 16px;
+  border: 1.5px solid color-mix(in srgb, #8C8FA3 15%, transparent);
+  background-color: #13131A;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.mood-tile:hover { 
+  transform: translateY(-3px); 
+  border-color: color-mix(in srgb, var(--tile-color,var(--primary)) 30%, transparent); 
+}
+
+/*check it when you do the js*/
+.mood-tile.selected { 
+  border-color: var(--tile-color,var(--primary)); 
+  background: color-mix(in srgb, var(--tile-color,var(--primary)) 10%, var(--surface)); 
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--tile-color,var(--primary)) 20%, transparent); 
+  transform: translateY(-3px); 
+}
+
+.mood-emoji{
+  font-size: 29px;
+  line-height: 1;
+}
+
+.emoji-name{
+  font-size: 13px;
+  color: #8C8FA3;
+}
+
+.mood-tile.selected .emoji-name{
+  color: #F0EDE6;
+}
+
+hr{
+  border-color: #4A9CAD;
+  opacity: 0.1;
+  margin-bottom: 12px;
+}
+
+.options-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 10px;
+}
+
+.option-btn{
+  padding: 20px 25px;
+  border-radius: 14px;
+  border: 1.5px solid color-mix(in srgb, #8C8FA3  18%, transparent);
+  background: #13131A; 
+  color: #8C8FA3;
+  font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 400;
+  cursor: pointer; text-align: left; transition: all 0.25s ease;
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
+  position: relative;
+}
+
+.option-btn:hover { 
+  border-color: color-mix(in srgb, #4A9CAD 40%, transparent); 
+  color: #F0EDE6; 
+  background: color-mix(in srgb, #4A9CAD 6%, #13131A);
+}
+
+.option-btn.selected {
+  border-color: #4A9CAD; 
+  background: color-mix(in srgb, #4A9CAD 12%, #13131A); 
+  color: #F0EDE6; 
+  box-shadow: 0 0 20px color-mix(in srgb, #4A9CAD 16%, transparent); 
+}
+    
+.option-check { 
+  width: 18px; 
+  height: 18px; 
+  border-radius: 5px; 
+  flex-shrink: 0; 
+  border: 1.5px solid color-mix(in srgb, #8C8FA3 30%, transparent); 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  transition: all 0.2s ease; 
+  font-size: 11px; 
+  color: transparent; 
+}
+
+.option-btn.selected .option-check { 
+  background: #4A9CAD; 
+  border-color: #4A9CAD; 
+  color: #0A1F22; 
+}
+
+.timer-grid{
+  display: grid;
+  grid-template-columns: 4;
+  gap: 10px;
+}
+
+.slider-wrap {
+  padding: 8px 0 16px; 
+}
+
+.range-input { 
+  width: 100%; 
+  -webkit-appearance: none; 
+  appearance: none; 
+  height: 4px; 
+  border-radius: 99px; 
+  outline: none; 
+  cursor: pointer; 
+  /*makes the backgrounf og the slider colored in question 4*/
+  background: linear-gradient(to right,#4A9CAD var(--val,50%), color-mix(in srgb, #8C8FA3 20%, transparent) var(--val,50%)); 
+}
+
+.range-input::-webkit-slider-thumb {
+  -webkit-appearance: none; 
+  width: 20px; 
+  height: 20px; 
+  border-radius: 50%; 
+  background: #4A9CAD; 
+  cursor: pointer; 
+  box-shadow: 0 0 12px color-mix(in srgb, #4A9CAD 50%, transparent); 
+  transition: transform 0.2s; 
+}
+
+.range-input::-webkit-slider-thumb:hover { 
+  transform: scale(1.2); 
+}
+
+.slider-labels {
+  display: flex; 
+  justify-content: space-between; 
+  margin-top: 10px; 
+  font-size: 12px;
+  color: #8C8FA3; 
+}
+
+.stars { 
+  display: flex; 
+  gap: 8px; 
+}
+
+.star {
+  font-size: 2rem; 
+  cursor: pointer; 
+  /*Modifies the element's apperance*/
+  transition: transform 0.2s, 
+  /*the filter grayscale means remove color from the element
+    opacity makes the element transparent
+    filter + time the property you wnat to animate and the duration*/
+  filter 0.2s; 
+  filter: grayscale(1) opacity(0.3); 
+}
+    
+.star.active { 
+  filter: grayscale(0) opacity(1); 
+}
+
+.text-area { 
+  width: 100%; 
+  padding: 16px 18px; 
+  border-radius: 14px; 
+  border: 1.5px solid color-mix(in srgb, #8C8FA3 18%, transparent); 
+  background: #13131A; 
+  color: #F0EDE6; 
+  font-family: 'DM Sans', sans-serif; 
+  font-size: 15px; 
+  line-height: 1.7; 
+  /*It handle appears at the bottom corner of an element up and down*/
+  resize: vertical; 
+  min-height: 100px; 
+  outline: none; 
+  transition: border-color 0.25s, 
+    box-shadow 0.25s; 
+}
+
+.text-area:focus { 
+  border-color: #4A9CAD; 
+  box-shadow: 0 0 20px color-mix(in srgb, #4A9CAD 15%, transparent); 
+}
+    
+.text-area::placeholder { 
+  color: color-mix(in srgb, #8C8FA3 50%, transparent); 
+}
+
+.submit-btn { 
+  text-decoration: none;
+  width: 100%; 
+  padding: 18px; 
+  border-radius: 16px; 
+  background: #4A9CAD; 
+  color: #0A1F22; 
+  font-family: 'DM Sans', sans-serif; 
+  font-size: 16px; 
+  font-weight: 500; 
+  border: none; 
+  cursor: pointer;
+   transition: all 0.3s; 
+   box-shadow: 0 4px 24px color-mix(in srgb, #4A9CAD 35%, transparent); 
+}
+    
+.submit-btn:hover { 
+  /*this makes the button bounce when you hover over it*/
+  transform: translateY(-2px); 
+  box-shadow: 0 8px 36px color-mix(in srgb, var(--primary) 50%, transparent); 
+}
+    
+.submit-note { 
+  text-align: center; 
+  margin-top: 14px; 
+  font-size: 12px; 
+  color: #8C8FA3; 
+  font-weight: 300; 
+}
+
+    
+.success-screen { 
+  display: none; 
+  text-align: center; 
+  padding: 80px 0; 
+}
+    
+.success-icon { 
+  font-size: 64px; 
+  margin-bottom: 24px; 
+}
+    
+.success-title { 
+  font-family: 'Playfair Display', serif; 
+  font-size: 2.4rem; font-style: italic; 
+  color: #4A9CAD; 
+  margin-bottom: 14px; 
+}
+    
+.success-sub { 
+  font-size: 16px; 
+  color: #8C8FA3; 
+  line-height: 1.7; 
+  max-width: 380px; 
+  margin: 0 auto 36px; 
+}
+    
+.success-btn { 
+  display: inline-block; 
+  padding: 14px 32px; 
+  border-radius: 12px; 
+  background: color-mix(in srgb, #4A9CAD 14%, transparent); 
+  border: 1px solid color-mix(in srgb, #4A9CAD 35%, transparent); 
+  color: #4A9CAD; 
+  font-family: 'DM Sans', sans-serif; 
+  font-size: 15px; 
+  font-weight: 500; 
+  cursor: pointer; 
+  text-decoration: none; 
+  transition: all 0.25s; 
+}
+    
+.success-btn:hover { 
+  background: #4A9CAD; 
+  color: #0A1F22; 
+}
+
+@media(max-width:500px){ .mood-grid{grid-template-columns:repeat(2,1fr)} .options-grid{grid-template-columns:1fr} }

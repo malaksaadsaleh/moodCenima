@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mood Cinema</title>
+    <link rel="stylesheet" href="{{url_for('static' , filename= 'web.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='wishlist.css')}}">
+  </head>
+
+  <body>
+    <header>
+      {% if logged_in %}
+        <div class="nav-bar">
+            <a href="/profile" class="nav-btn" style="text-decoration: none; color: white;">
+              <img src="{{ profile_pics or '/static/default_avatar.png' }}"
+                alt="profile" style="width: 32px; border-radius: 50%;">
+              {{username}}
+            </a>
+          
+            <a href="/wishlist" style="text-decoration: none; color: white;">
+              <button class="heart-btn"> ♡ Wishlist </button>
+            </a>
+        </div>
+        
+      {% else %}
+        <button class="login-btn" id="loginBtn">Login / Register</button>
+      {% endif %}
+
+      <h1 class="title">Mood<span class="titleLight">Cinema</span></h1>
+      <h4 class="description">How are you feeling today?</h4>
+    </header>
+
+    <main>
+      <div class="moods">
+
+        <a href="{{url_for('mood_page', mood_name='happy' )}}" style="text-decoration: none; color: white;"  rel="noopener noreferrer">
+          <div class="mood happy">
+            Happy
+            <p class="desc">Feel-good, fun, and uplifting movies</p>
+          </div>
+        </a>
+
+        <a href="{{url_for('mood_page', mood_name='sad' )}}" style="text-decoration: none; color: white;" rel="noopener noreferrer">
+          <div class="mood sad">
+            Sad
+            <p class="desc">Emotional and touching stories</p>
+          </div>
+        </a>
+
+        
+        <!-- noopener: prevents the new page from using js to control original page
+          noreferrer: prevents the new page from seeing which website the user came from-->
+        <a href="{{url_for('mood_page', mood_name='chill' )}}" style="text-decoration: none; color: white;" rel="noopener noreferrer">
+          <div class="mood chill">
+            Chill
+            <p class="desc">Relaxing and easy-going movies</p>
+          </div>
+        </a>
+
+        <a href="{{url_for('mood_page', mood_name='angry' )}}" style="text-decoration: none; color: white;" rel="noopener noreferrer">
+          <div class="mood angry">
+            Angry
+            <p class="desc">Action-packed and intense films</p>
+          </div>   
+        </a>
+      </div>
+
+  
+        <div class="modal-overlay" id="modalOverlay">
+            <div class="modal">
+                <button class="modal-close" id="modalClose">&times;</button>
+                <h2 class="modal-title">Welcome </h2>
+                <p class="modal-subtitle">Sign in to save your mood picks</p>
+                
+                <input class="modal-input" type="text" id="email" placeholder="Email" />
+                <input class="modal-input" type="password" id="password" placeholder="Password" />
+                
+                <button class="modal-submit" id="submitLogin">Sign In</button>
+                <p class="modal-footer">Don't have an account? <span class="modal-link" id="goToSignup">Sign up</span></p>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="signupOverlay">
+            <div class="modal">
+                <button class="modal-close" id="signupClose">&times;</button>
+                <h2 class="modal-title">Create Account</h2>
+                <p class="modal-subtitle">Join to start saving your mood picks</p>
+                
+                <input class="modal-input" type="text" id="username" placeholder="Username" />
+                <input class="modal-input" type="email" id="signupEmail" placeholder="Email" />
+                <input class="modal-input" type="password" id="signupPassword" placeholder="Password" />
+                <input class="modal-input" type="password" placeholder="Confirm Password" />
+                
+                <button class="modal-submit" id="submitSignup">Sign Up</button>
+                <p class="modal-footer">Already have an account? <span class="modal-link" id="goToLogin">Log in</span></p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+      Click any mood above to see its full palette in action
+    </footer>
+    <script src="{{url_for('static', filename= 'js/web.js')}}"></script>
+  </body>
+</html>

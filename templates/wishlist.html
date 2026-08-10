@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MoodCinema – My Wishlist</title>
+  <link rel="stylesheet" href="{{url_for('static', filename='wishlist.css')}}" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <a href="{{ url_for('moodCinema') }}" class="logo">Mood<span>Cinema</span></a>
+    <a href="{{ url_for('moodCinema') }}" class="nav-home">Home</a>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <h1 class="hero-title">Films I want to <em>feel</em></h1>
+    <p class="hero-subtitle">Your personal collection of films waiting for the right mood, the right night, the right glass of wine.</p>
+  </header>
+
+  <!-- CARDS GRID — rendered server-side by Flask -->
+  <main class="grid" id="wishlist-grid">
+    {% for item in wishlist %}
+      <div class="movie-card" id="movie-{{ item['wishlist_id'] }}">
+        <img src="{{ url_for('static', filename='posters/' + item['poster']) }}"
+             alt="{{ item['name'] }}" class="movie-img">
+        <div class="movie-info">
+          <div class="movie-gen">{{ item['genre'] }}</div>
+          <div class="movie-name">{{ item['name'] }}</div>
+          <div class="movie-rating">⭐ {{ item['rating'] }}</div>
+         <!-- <button class="remove-btn"
+                  onclick="removeFromWishlist({{ item['wishlist_id'] }})">
+            ✕ Remove
+          </button>
+          -->
+        </div>
+      </div>
+    {% endfor %}
+  </main>
+
+  <!-- EMPTY STATE — only shown when wishlist is empty -->
+  {% if not wishlist %}
+  <div class="empty-state" id="empty-state">
+    <div class="empty-icon">🎬</div>
+    <h3>Your wishlist is empty</h3>
+    <p>Go to a mood page and tap the ♡ on any film to save it here.</p>
+    <a href="{{ url_for('moodCinema') }}" class="hero-badge"
+       style="display:inline-flex; text-decoration:none; margin-top: 8px;">
+      ← Back to Home
+    </a>
+  </div>
+  {% endif %}
+
+ <script src="{{ url_for('static', filename='js/web.js') }}"></script>
+
+</body>
+</html>

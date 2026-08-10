@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>{{mood}} Zone</title>
+
+    <link rel="stylesheet" href="{{url_for('static', filename=mood + '.css')}}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  </head>
+  <body>
+    <div class="contanier">
+      <header>
+        <a href="{{url_for('moodCinema')}}" class="back-link">
+          ← All Moods
+        </a>
+        <div class="mood-button">
+          <span class="dot">.</span>
+          {% if mood == 'happy' %}
+            😄 Happy / Cherful
+          {% elif mood == 'sad' %}
+            😢 Sad / Depresed
+          {% elif mood == 'chill' %}
+            😌 Calm / Peaceful
+          {% elif mood == 'angry' %}
+            😡 Angry / Intense
+          {% endif %}
+          
+        </div>
+
+        {% if mood == 'happy' %}
+          <h1 class="film-quote">Films that <span style="font-style: italic; color: #FFB703;">bright day</span></h1>
+          <p class="subtitle">Turn it up. These films burst with colour, laughter, and the kind of joy that makes you want to dance in your kitchen.</p>
+        {% elif mood == 'sad' %}
+          <h1 class="film-quote">Films that <span style="font-style: italic; color: #4B6584;">feel with</span></h1>
+          <p class="subtitle">Sometimes you need a film that understands. These stories hold your sadness gently and remind you that grief is something shared.</p>
+        {% elif mood == 'chill' %}
+          <h1 class="film-quote">Films that <span style="font-style: italic; color: #4A9CAD;">quiet mind</span></h1>
+          <p class="subtitle">Slow down. Let the frame breathe. These films won't rush you anywhere — they simply ask you to be present.</p>
+        {% elif mood == 'angry' %}
+          <h1 class="film-quote">Films that <span style="font-style: italic; color: #D62828;">hit hard</span></h1>
+          <p class="subtitle">Channel it. These films match your fire — raw, relentless, and built to make your pulse race from the first frame.</p>
+        {% endif %}
+
+      </header>
+      <main>
+        <section class="movies">
+
+          {% for movie in movies %}
+            <div class="movie-card">
+              <div class="movie-poster">
+                <img class="movie-img"  src="{{ url_for('static', filename='posters/' + movie['poster']) }}">
+                <div class="movie-rating">⭐ {{ movie['rating'] }}</div>
+              </div>
+              <div class="movie-info">
+                <div class="movie-gen">{{ movie['genre'] }}</div>
+                <div class="movie-name">{{ movie['name'] }}</div>
+                <div class="about-movie">{{ movie['date'] }} &#183; {{ movie['director_name'] }} &#183; {{ movie['duration'] }}</div>
+                <div class="movie-disc">{{movie['description']}}</div>
+                <hr>
+                <div class="movie-footer">
+                  <a href="{{ movie['link'] }}" style="text-decoration: none; color: white;" target="_blank">
+                    <div class="watch-btn">
+                      ▶ Watch
+                    </div>
+                  </a>
+                    <button class="save-btn" data-movie-id="{{ movie['id'] }}">♡</button>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </section>
+        </main>
+      
+   
+
+      <footer>
+        <div class="survey-box">
+          <div class="survey-text">
+            <h3>Got a minute to share?</h3>
+            <p>Tell us about your experience - it only takes 30 seconds</p>
+          </div>
+          <a href="{{url_for('survey')}}" style="text-decoration: none; color: white;">
+            <button class="go-to-survey-btn">
+              Take the Survey
+            </button>
+          </a>
+        </div>
+      </footer>
+    </div>
+    <script src="{{ url_for('static', filename='js/web.js') }}"></script>
+  </body>
+</html>

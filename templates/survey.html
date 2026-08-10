@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>survy</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='survey.css')}}">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar">
+        <div class="logo"><a href="{{url_for('moodCinema')}}" style="text-decoration: none; color: #F0EDE6;">Mood<span class="highlight">Cinema</span></a></div>
+        <div class="nav-links">
+          <a href="{{url_for('moodCinema')}}" class="home-link">Home</a>
+          <a href="{{ url_for('wishlist_page') }}" class="wishlist-link">♡ WishList</a>
+        </div>
+      </nav>
+
+      <div class="survy-Form">
+        <header>
+          <div class="step-indicator">
+            <div class="step-dot active" id="step1"></div>
+            <div class="step-dot" id="step2"></div>
+            <div class="step-dot" id="step3"></div>
+            <div class="step-dot" id="step4"></div>
+            <div class="step-dot" id="step5"></div>
+            <span class="steps" id="stepText">Step 1 of 5</span>
+          </div>
+          <h1>Tell us about your <em>taste</em></h1>
+          <p class="Subtitle">A few questions to make your mood-to-movie matches feel almost telepathic.</p>
+        </header>
+
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        
+        <div class="question-block">
+          <div class="question-label">Question 01</div>
+          <div class="question-text">Which moods do you usually watch films in?</div>
+          <div class="mood-grid">
+            <div class="mood-tile" data-group="moods" style="color: #FFB703;" onclick="toggleTile(this)"><div class="mood-emoji">😄</div><span class="emoji-name">Happy</span></div>
+            <div class="mood-tile" data-group="moods" style="color: #4A9CAD;" onclick="toggleTile(this)"><div class="mood-emoji">😌</div><span class="emoji-name">Calm</span></div>
+            <div class="mood-tile" data-group="moods" style="color: #4B6584;" onclick="toggleTile(this)"><div class="mood-emoji">😢</div><span class="emoji-name">Sad</span></div>
+            <div class="mood-tile" data-group="moods" style="color: #D62828;" onclick="toggleTile(this)"><div class="mood-emoji">😡</div><span class="emoji-name">Angry</span></div>
+          </div>
+        </div>
+        <hr>
+
+        <div class="question-block">
+          <div class="question-label">Question 02</div>
+          <div class="question-text">What genres do you gravitate toward?</div>
+          <div class="options-grid">
+           <button class="option-btn" onclick="toggleOption(this, 'genre')"><span class="option-check">✓</span>🎭 Drama</button>
+            <button class="option-btn" onclick="toggleOption(this, 'genre')"><span class="option-check">✓</span>😂 Comedy</button>
+            <button class="option-btn" onclick="toggleOption(this, 'genre')"><span class="option-check">✓</span>🔪 Thriller</button>
+            <button class="option-btn" onclick="toggleOption(this, 'genre')"><span class="option-check">✓</span>🚀 Sci-Fi</button>
+            <button class="option-btn" onclick="toggleOption(this, 'genre')"><span class="option-check">✓</span>💀 Horror</button>
+            <button class="option-btn" onclick="toggleOption(this, 'genre')"><span class="option-check">✓</span>💕 Romance</button>
+            <button class="option-btn" onclick="toggleOption(this, 'genre')"><span class="option-check">✓</span>🌍 Foreign</button>
+            <button class="option-btn" onclick="toggleOption(this, 'genre')"><span class="option-check">✓</span>🎨 Animation</button>
+            <button class="option-btn" onclick="toggleOption(this, 'genre')"><span class="option-check">✓</span>📽️ Documentary</button>
+          </div>
+        </div>
+        <hr>
+
+        <div class="question-block">
+          <div class="question-label">Question 03</div>
+          <div class="question-text">How much time do you usually have for a film?</div>
+          <div class="options-grid">
+            <button class="option-btn"  onclick="toggleSingle(this,'time')"><span class="option-check">✓</span>Under 90 min</button>
+            <button class="option-btn"  onclick="toggleSingle(this,'time')"><span class="option-check">✓</span>90 – 120 min</button>
+            <button class="option-btn"  onclick="toggleSingle(this,'time')"><span class="option-check">✓</span>2 – 3 hours</button>
+            <button class="option-btn"  onclick="toggleSingle(this,'time')"><span class="option-check">✓</span>Doesn't matter</button>
+          </div>
+        </div>
+        <hr>
+
+        <div class="question-block">
+          <div class="question-label">Question 04</div>
+          <div class="question-text">How adventurous are you with foreign-language films?</div>
+          <div class="slide-wraper">
+            <!--A new input type called range to set a range to a specific some thing-->
+            <input type="range" class="range-input" id="foreignSlider" min="0" max="100" value="50" oninput="updateSlider(this)"/>
+            <div class="slider-labels"><span>Only English please</span><span>Subtitles are life</span></div>
+          </div>
+        </div>
+        <hr>
+
+        <div class="question-block">
+          <div class="question-label">Question 05</div>
+          <div class="question-text">How would you rate your current movie discovery experience?</div>
+          <div class="stars" id="starRating">
+            <span class="star" onclick="rateStar(1)">★</span>
+            <span class="star" onclick="rateStar(2)">★</span>
+            <span class="star" onclick="rateStar(3)">★</span>
+            <span class="star" onclick="rateStar(4)">★</span>
+            <span class="star" onclick="rateStar(5)">★</span>
+          </div>
+        </div>
+        <hr>
+
+        <div class="question-block">
+          <div class="question-label">Question 06 — Optional</div>
+          <div class="question-text">Do you have any comment? Tell us anything.</div>
+          <textarea class="text-area" placeholder="e.g. 'I wanted to watch the movie ... but I couldn't find it...'"></textarea>
+        </div>
+
+        <div style="margin-top:48px">
+          <button class="submit-btn" onclick="submitSurvey()">Submit & Get My Matches →</button>
+          <p class="submit-note">Your answers are used only to personalise your recommendations.</p>
+        </div>
+      </div>
+
+      <div class="success-screen" id="successScreen">
+        <div class="success-icon">🎬</div>
+        <div class="success-title">You're all set.</div>
+        <p class="success-sub">Your taste profile is ready. MoodCinema will now match films to exactly how you're feeling — every single time.</p>
+        <a href="{{url_for('moodCinema')}}" class="success-btn">→ Explore Films Now</a>
+      </div>
+
+      <script src="{{ url_for('static', filename='js/web.js') }}"></script>
+
+    </div>
+  </body>
+</html>

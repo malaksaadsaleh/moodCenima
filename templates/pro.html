@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile Page</title>
+  <link rel="stylesheet" href="{{url_for('static', filename='pro.css')}}" />
+</head>
+<body>
+
+  <div class="profile-card" id="profileCard">
+
+    <!-- PROFILE PICTURE AREA -->
+     <a href="{{url_for('moodCinema')}}">
+      <button class="p-close" id="Close">&times;</button>
+     </a>
+    <div class="pfp">
+      <div id="avatarFallback" class="avatar-fallback 
+     {% if profile_pic %}hidden{% endif %}">
+  {{ username[0]|upper if username else 'U' }}
+</div>
+     <img id="profilePic"
+     class="profile-pic {% if not profile_pic %}hidden{% endif %}"
+     src="{% if profile_pic %}/static/{{ profile_pic }}{% endif %}" />
+
+      <!-- plus button (only visible in edit mode) -->
+      <label class="upload-btn hidden" id="uploadBtn">
+        +
+        <input type="file" accept="image/*" id="imageInput" hidden />
+      </label>
+    </div>
+
+    <!-- DISPLAY MODE -->
+    <div class="text" id="textView">
+      <h2 id="usernameText">{{ username }}</h2>
+      <p id="emailText">{{ email }}</p>
+
+    </div>
+
+    <!-- EDIT MODE INPUTS -->
+     <div class="input">
+    <input type="text" id="usernameInput" class="edit-input" value="{{ username }}" />
+    
+       </div>
+    <div class="btn-group">
+      <button class="edit-btn" id="editBtn">Edit</button>
+      <button class="save-btn hidden" id="saveBtn">Save</button>
+      <button class="logout-btn" id="logoutBtn">Log Out</button>
+    </div>
+  </div>
+
+  <!--<div class="password-section">
+    <button type="button" class="toggle-pw-btn" id="togglePwBtn">Change Password</button>
+    
+    <div id="pwFields" class="hidden">
+        <input type="password" id="currentPwInput" placeholder="Current Password" class="edit-input" />
+        <input type="password" id="newPwInput" placeholder="New Password" class="edit-input" />
+        <input type="password" id="confirmPwInput" placeholder="Confirm New Password" class="edit-input" />
+        <button type="button" class="save-pw-btn" id="savePwBtn">Update Password</button>
+    </div>
+    <p id="pwMessage" class="message-text"></p>
+</div>
+-->
+<script  src="{{ url_for('static', filename='js/web.js') }}"></script>
+
+</body>
+</html>
